@@ -7,3 +7,6 @@ spring:
   web:
     resources:
       static-locations: classpath:/static/
+
+polar:
+  auth-service-uri: ${AUTH_SERVICE_URL:http://localhost:8886}
