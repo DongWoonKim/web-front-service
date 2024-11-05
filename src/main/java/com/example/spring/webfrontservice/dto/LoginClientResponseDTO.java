@@ -1,10 +1,12 @@
 package com.example.spring.webfrontservice.dto;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class LoginClientResponseDTO {
-    private boolean isLoggedIn;
+    private boolean loggedIn;
     private String userName;
     private String userId;
     private String message;
@@ -13,11 +15,11 @@ public class LoginClientResponseDTO {
 
     public LoginResponseDTO toLoginResponseDTO() {
         return LoginResponseDTO.builder()
-                .isLoggedIn(isLoggedIn)
                 .userName(userName)
                 .userId(userId)
-                .message(message)
                 .accessToken(accessToken)
+                .url(loggedIn ? "/webs" : "/webs/login")
+                .message(loggedIn ? "로그인 성공!" : "로그인 실패!")
                 .build();
     }
 }

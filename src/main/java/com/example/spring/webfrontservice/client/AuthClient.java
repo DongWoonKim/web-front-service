@@ -14,4 +14,7 @@ public interface AuthClient {
     @PostMapping("/auths/login")
     LoginClientResponseDTO login(@RequestBody LoginRequestDTO loginRequestDTO);
 
+    @PostMapping("/auths/refresh")
+    RefreshTokenClientResponseDTO refresh(@RequestBody RefreshTokenRequestDTO refreshTokenRequestDTO);
+
 }

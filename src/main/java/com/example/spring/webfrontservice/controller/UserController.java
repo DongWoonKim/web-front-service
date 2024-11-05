@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/webs")
 public class UserController {
 
+    @GetMapping
+    public String home() {
+        return "home";
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -17,5 +22,6 @@ public class UserController {
     public String join() {
         return "join";
     }
+
 
 }

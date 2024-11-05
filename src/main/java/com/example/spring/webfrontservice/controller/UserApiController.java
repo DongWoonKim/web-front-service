@@ -23,14 +23,15 @@ public class UserApiController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> signIn(
-            @RequestBody LoginRequestDTO requestDTO,
-            HttpServletResponse response
-    ) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO requestDTO, HttpServletResponse response) {
         LoginClientResponseDTO logined = userService.login(requestDTO);
-        // Refresh Token을 HttpOnly 쿠키에 저장
-        CookieUtil.addCookie(response, "refreshToken", logined.getRefreshToken(), 7 * 24 * 60 * 60);
 
+        if (logined != null && logined.isLoggedIn()) {
+            // Refresh Token을 HttpOnly 쿠키에 저장
+            CookieUtil.addCookie(response, "refreshToken", logined.getRefreshToken(), 7 * 24 * 60 * 60);
+        }
+
+        assert logined != null;
         return ResponseEntity.ok( logined.toLoginResponseDTO() );
     }
 
