@@ -5,6 +5,8 @@ import com.example.spring.webfrontservice.dto.JoinRequestDTO;
 import com.example.spring.webfrontservice.dto.JoinResponseDTO;
 import com.example.spring.webfrontservice.dto.LoginRequestDTO;
 import com.example.spring.webfrontservice.dto.LoginResponseDTO;
+import com.example.spring.webfrontservice.util.CookieUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,6 @@ public class UserService {
     }
 
     public LoginResponseDTO login(LoginRequestDTO requestDTO) {
-        LoginResponseDTO logined = authClient.login(requestDTO);
-        // 쿠키에 저장
-        return logined;
+        return authClient.login(requestDTO);
     }
 }

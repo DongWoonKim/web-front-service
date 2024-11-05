@@ -5,6 +5,7 @@ import com.example.spring.webfrontservice.dto.JoinResponseDTO;
 import com.example.spring.webfrontservice.dto.LoginRequestDTO;
 import com.example.spring.webfrontservice.dto.LoginResponseDTO;
 import com.example.spring.webfrontservice.service.UserService;
+import com.example.spring.webfrontservice.util.CookieUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,11 @@ public class UserApiController {
             @RequestBody LoginRequestDTO requestDTO,
             HttpServletResponse response
     ) {
-        return ResponseEntity.ok( userService.login(requestDTO) );
+        LoginResponseDTO logined = userService.login(requestDTO);
+        // Refresh Token을 HttpOnly 쿠키에 저장
+        CookieUtil.addCookie(response, "refreshToken", logined.getRefreshToken(), 7 * 24 * 60 * 60);
+
+        return ResponseEntity.ok( logined );
     }
 
 }
