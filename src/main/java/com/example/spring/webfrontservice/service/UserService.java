@@ -2,6 +2,7 @@ package com.example.spring.webfrontservice.service;
 
 import com.example.spring.webfrontservice.client.AuthClient;
 import com.example.spring.webfrontservice.dto.JoinRequestDTO;
+import com.example.spring.webfrontservice.dto.JoinResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,8 @@ public class UserService {
 
     private final AuthClient authClient;
 
-    public String join(JoinRequestDTO joinRequestDTO) {
-        return authClient.join(joinRequestDTO) ? "/webs/login" : "/webs/join";
+    public JoinResponseDTO join(JoinRequestDTO joinRequestDTO) {
+        return authClient.join(joinRequestDTO);
     }
 
 }

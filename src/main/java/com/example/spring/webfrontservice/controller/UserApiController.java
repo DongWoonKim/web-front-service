@@ -17,13 +17,7 @@ public class UserApiController {
 
     @PostMapping("/join")
     public ResponseEntity<JoinResponseDTO> join(@RequestBody JoinRequestDTO joinRequestDTO) {
-        String responseUrl = userService.join(joinRequestDTO);
-
-        return ResponseEntity.ok(
-                JoinResponseDTO.builder()
-                        .url(responseUrl)
-                        .build()
-        );
+        return ResponseEntity.ok( userService.join(joinRequestDTO) );
     }
 
 }
