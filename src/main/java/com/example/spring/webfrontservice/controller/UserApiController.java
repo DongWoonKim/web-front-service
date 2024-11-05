@@ -2,7 +2,10 @@ package com.example.spring.webfrontservice.controller;
 
 import com.example.spring.webfrontservice.dto.JoinRequestDTO;
 import com.example.spring.webfrontservice.dto.JoinResponseDTO;
+import com.example.spring.webfrontservice.dto.LoginRequestDTO;
+import com.example.spring.webfrontservice.dto.LoginResponseDTO;
 import com.example.spring.webfrontservice.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +21,14 @@ public class UserApiController {
     @PostMapping("/join")
     public ResponseEntity<JoinResponseDTO> join(@RequestBody JoinRequestDTO joinRequestDTO) {
         return ResponseEntity.ok( userService.join(joinRequestDTO) );
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> signIn(
+            @RequestBody LoginRequestDTO requestDTO,
+            HttpServletResponse response
+    ) {
+        return ResponseEntity.ok( userService.login(requestDTO) );
     }
 
 }

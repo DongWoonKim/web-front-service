@@ -3,6 +3,8 @@ package com.example.spring.webfrontservice.service;
 import com.example.spring.webfrontservice.client.AuthClient;
 import com.example.spring.webfrontservice.dto.JoinRequestDTO;
 import com.example.spring.webfrontservice.dto.JoinResponseDTO;
+import com.example.spring.webfrontservice.dto.LoginRequestDTO;
+import com.example.spring.webfrontservice.dto.LoginResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +18,9 @@ public class UserService {
         return authClient.join(joinRequestDTO);
     }
 
+    public LoginResponseDTO login(LoginRequestDTO requestDTO) {
+        LoginResponseDTO logined = authClient.login(requestDTO);
+        // 쿠키에 저장
+        return logined;
+    }
 }
