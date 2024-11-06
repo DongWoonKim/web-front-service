@@ -1,9 +1,11 @@
 $(document).ready(() => {
 
     let token = localStorage.getItem('accessToken');
-    if (token !== null && token.trim() !== '') {
+    console.log('token :: ', token);
+    if (token !== 'undefined' && token && token.trim() !== '') {
         window.location.href = '/webs';
     }
+
     setupAjax();
     loginClicked();
 

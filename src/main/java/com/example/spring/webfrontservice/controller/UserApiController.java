@@ -24,6 +24,7 @@ public class UserApiController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO requestDTO, HttpServletResponse response) {
+        System.out.println("LoginRequestDTO requestDTO :: " + requestDTO);
         LoginClientResponseDTO logined = userService.login(requestDTO);
 
         if (logined != null && logined.isLoggedIn()) {
