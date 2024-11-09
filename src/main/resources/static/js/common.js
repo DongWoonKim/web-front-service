@@ -10,6 +10,14 @@ let setupAjax = () => {
     });
 }
 
+let checkToken = () => {
+    let token = localStorage.getItem('accessToken');
+    if (token == 'undefined' || token == null || token.trim() === '') {
+        localStorage.removeItem('accessToken');
+        handleTokenExpiration();
+    }
+}
+
 let handleTokenExpiration = () => {
     $.ajax({
         type: 'POST',
@@ -22,20 +30,14 @@ let handleTokenExpiration = () => {
         success: (response) => {
             console.log('res :: ', response)
             // 새로운 Access Token을 로컬스토리지에 저장
-            localStorage.setItem('accessToken', response.token);
+            localStorage.setItem('accessToken', response.accessToken);
         },
         error: (error) => {
-            alert('로그인이 필요합니다. 다시 로그인해주세요.');
-
             // 실패 시 기본 동작
-            window.location.href = '/webs/login'; // 실패 시 로그인 페이지로 이동
+            alert('로그인이 필요합니다. 다시 로그인해주세요.');
+            localStorage.removeItem('accessToken');
+            window.location.href = '/webs/login';
         }
     });
 }
 
-let checkToken = () => {
-    let token = localStorage.getItem('accessToken');
-    if (token == null || token.trim() === '') {
-        window.location.href = "/webs/login";
-    }
-}

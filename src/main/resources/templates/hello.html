@@ -3,9 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
     <title>Hello</title>
 </head>
 <body>
     <h1>Hello World!</h1 >
+    <button onclick="testClicked()">test</button>
 </body>
+<script>
+    $(document).ready(() => {
+        // setupAjax();
+        checkToken();
+        console.log('access token :: ', localStorage.getItem('accessToken'))
+
+    });
+
+    let checkToken = () => {
+        let token = localStorage.getItem('accessToken');
+        if (token == 'undefined' || token == null || token.trim() === '') {
+            handleTokenExpiration();
+        }
+    }
+
+
+    let setupAjax = () => {
+        // 모든 Ajax 요청에 JWT Access Token을 포함
+        $.ajaxSetup({
+            beforeSend: function(xhr) {
+                let token = localStorage.getItem('accessToken'); // 저장된 Access Token 가져오기
+                if (token) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + token); // Authorization 헤더에 Access Token 추가
+                }
+            }
+        });
+    }
+
+    let testClicked = () => {
+        let formData = {
+            message : "hello"
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/webs/hello', // 서버의 엔드포인트 URL
+            data: JSON.stringify(formData), // 데이터를 JSON 형식으로 변환
+            contentType: 'application/json; charset=utf-8', // 전송 데이터의 타입
+            dataType: 'json', // 서버에서 받을 데이터의 타입
+            success: (response) => {
+                console.log('res 1 :: ', response)
+                // localStorage.setItem('accessToken', response.token);
+                // 로그인 성공 시 '/' 경로로 이동
+                // window.location.href = response.url;
+            },
+            error: (xhr, e) => {
+                console.log('err 1 :: ', xhr);
+                if (xhr.status === 401) {
+                    console.log('err 2 :: ', e);
+                    // Refresh Token을 통해 Access Token 재발급 요청
+                    handleTokenExpiration();
+                } else {
+                    // 다른 오류 처리
+                    console.error('요청 오류 발생:', xhr);
+                }
+            }
+
+        });
+    }
+
+    let handleTokenExpiration = () => {
+        $.ajax({
+            type: 'POST',
+            url: '/refresh-token', // 새로운 Access Token 요청을 처리하는 엔드포인트
+            contentType: 'application/json; charset=utf-8', // 전송 데이터의 타입
+            dataType: 'json', // 서버에서 받을 데이터의 타입
+            xhrFields: {
+                withCredentials: true // 쿠키를 포함한 요청을 보냄
+            },
+            success: (response) => {
+                console.log('res 2 :: ', response)
+                // 새로운 Access Token을 로컬스토리지에 저장
+            },
+            error: (error) => {
+                console.log('err :: ', error)
+                alert('다시 한 번 로그인부탁드립니다.')
+                // 실패 시 기본 동작
+                window.location.href='/webs/login';
+            }
+        });
+    }
+</script>
 </html>

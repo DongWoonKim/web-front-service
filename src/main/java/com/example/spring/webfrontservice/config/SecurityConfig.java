@@ -46,8 +46,8 @@ public class SecurityConfig {
                 )
 
                 // Header 기반 인증 필터 추가
-                .addFilterBefore(new HeaderAuthenticationFilter(),
-                        UsernamePasswordAuthenticationFilter.class)
+//                .addFilterBefore(new HeaderAuthenticationFilter(),
+//                        UsernamePasswordAuthenticationFilter.class)
         ;
 
         return http.build();

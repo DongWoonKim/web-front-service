@@ -22,6 +22,7 @@ public class TokenService {
                 .refreshToken(refreshToken)
                 .build();
 
+        System.out.println("refresh :: " + build);
         return authClient.refresh(build);
     }
 

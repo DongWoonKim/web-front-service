@@ -1,14 +1,13 @@
 $(document).ready(() => {
 
+    setupAjax();
+
     let token = localStorage.getItem('accessToken');
-    console.log('token :: ', token);
     if (token !== 'undefined' && token && token.trim() !== '') {
         window.location.href = '/webs';
     }
 
-    setupAjax();
     loginClicked();
-
 });
 
 let loginClicked = () => {
@@ -29,7 +28,7 @@ let loginClicked = () => {
             dataType: 'json', // 서버에서 받을 데이터의 타입
             success: (response) => {
                 alert(response.message);
-                localStorage.setItem('accessToken', response.token);
+                localStorage.setItem('accessToken', response.accessToken);
                 // 로그인 성공 시 '/' 경로로 이동
                 window.location.href = response.url;
             },

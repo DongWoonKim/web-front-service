@@ -21,7 +21,6 @@ public class TokenApiController {
     @PostMapping("/refresh-token")
     ResponseEntity<?> refreshToken(HttpServletRequest request, HttpServletResponse response) {
         RefreshTokenClientResponseDTO responseDTO = tokenService.refreshToken(request.getCookies());
-
         if (responseDTO == null || responseDTO.getStatus() != 1) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Refresh Token이 유효하지 않습니다.");
         }
