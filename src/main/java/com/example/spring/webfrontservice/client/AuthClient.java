@@ -17,4 +17,9 @@ public interface AuthClient {
     @PostMapping("/auths/refresh")
     RefreshTokenClientResponseDTO refresh(@RequestBody RefreshTokenRequestDTO refreshTokenRequestDTO);
 
+    @PostMapping("/auths/validToken")
+    ValidTokenResponseDTO validToken(@RequestBody ValidTokenRequestDTO validTokenRequestDTO);
+
+    @PostMapping("/auths/claims")
+    ClaimsResponseDTO getAuthentication(@RequestBody ClaimsReqeustDTO claimsReqeustDTO);
 }
