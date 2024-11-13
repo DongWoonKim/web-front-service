@@ -2,10 +2,10 @@ $(document).ready(() => {
 
     setupAjax();
 
-    let token = localStorage.getItem('accessToken');
-    if (token !== 'undefined' && token && token.trim() !== '') {
-        window.location.href = '/webs';
-    }
+    // let token = localStorage.getItem('accessToken');
+    // if (token !== 'undefined' && token && token.trim() !== '') {
+    //     window.location.href = '/webs';
+    // }
 
     loginClicked();
 });
