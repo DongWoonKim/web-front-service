@@ -28,7 +28,7 @@ let handleTokenExpiration = () => {
             withCredentials: true // 쿠키를 포함한 요청을 보냄
         },
         success: (response) => {
-            console.log('res :: ', response)
+            console.log('res :: ', response.accessToken)
             // 새로운 Access Token을 로컬스토리지에 저장
             localStorage.setItem('accessToken', response.accessToken);
         },

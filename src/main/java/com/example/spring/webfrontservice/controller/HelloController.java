@@ -23,15 +23,13 @@ public class HelloController {
         return "hello";
     }
 
-    @PostMapping("/hello")
+    @PostMapping("/api/hello")
     @ResponseBody
     public HelloResponseDTO helloPost(
             @RequestBody HelloRequestDTO requestDTO,
             HttpServletRequest request,
             HttpServletResponse response
     ) {
-        System.out.println("helloPost :: " + requestDTO);
-//        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         // principal(subject/userId) 가져오기
@@ -42,10 +40,7 @@ public class HelloController {
                 .map(GrantedAuthority::getAuthority)
                 .toList();
 
-        System.out.println("user id :: " + userId);
-        roles.forEach(role -> System.out.println("role :: " + role));
-
-
+        System.out.println(userId + " : " + roles.getFirst());
         return HelloResponseDTO.builder()
                 .message("It's ok.")
                 .build();

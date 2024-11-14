@@ -17,12 +17,6 @@ public class SecurityConfig {
     private final TokenAuthenticationFilter tokenAuthenticationFilter;
 
     @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/favicon.ico");
-    }
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -36,7 +30,11 @@ public class SecurityConfig {
                                 "/refresh-token",
                                 "/login",
                                 "/logout",
-                                "/access-denied"
+                                "/access-denied",
+                                "/favicon.ico",
+                                "/images/**",
+                                "/css/**",
+                                "/js/**"
                         )
                         .permitAll()
                         .anyRequest().authenticated()

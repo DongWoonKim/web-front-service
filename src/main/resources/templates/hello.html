@@ -12,15 +12,17 @@
 </body>
 <script>
     $(document).ready(() => {
-        // setupAjax();
+        setupAjax();
         checkToken();
-        console.log('access token :: ', localStorage.getItem('accessToken'))
+
 
     });
 
     let checkToken = () => {
         let token = localStorage.getItem('accessToken');
+        console.log('access token 22 :: ', token)
         if (token == 'undefined' || token == null || token.trim() === '') {
+            console.log('hihihihi112')
             handleTokenExpiration();
         }
     }
@@ -45,7 +47,7 @@
 
         $.ajax({
             type: 'POST',
-            url: '/webs/hello', // 서버의 엔드포인트 URL
+            url: '/webs/api/hello', // 서버의 엔드포인트 URL
             data: JSON.stringify(formData), // 데이터를 JSON 형식으로 변환
             contentType: 'application/json; charset=utf-8', // 전송 데이터의 타입
             dataType: 'json', // 서버에서 받을 데이터의 타입
@@ -82,6 +84,7 @@
             success: (response) => {
                 console.log('res 2 :: ', response)
                 // 새로운 Access Token을 로컬스토리지에 저장
+                localStorage.setItem('accessToken', response.accessToken);
             },
             error: (error) => {
                 console.log('err :: ', error)

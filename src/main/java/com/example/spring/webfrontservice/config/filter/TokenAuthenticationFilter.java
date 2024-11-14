@@ -35,6 +35,20 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();
         log.info("requestURI: {}", requestURI);
 
+        if (
+                (
+                        requestURI.startsWith("/webs")
+                        && !requestURI.contains("/api/hello")
+                )
+                || requestURI.startsWith("/js")
+                || requestURI.startsWith("/css")
+                || requestURI.equals("/login")
+                || requestURI.equals("/refresh-token")
+        ) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         String token = resolveToken(request);
         log.info("token: {}", token);
         int statusNum = (token == null)
