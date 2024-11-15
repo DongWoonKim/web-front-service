@@ -43,6 +43,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
                 || requestURI.startsWith("/js")
                 || requestURI.startsWith("/css")
                 || requestURI.equals("/login")
+                || requestURI.equals("/join")
                 || requestURI.equals("/refresh-token")
         ) {
             chain.doFilter(request, response);
