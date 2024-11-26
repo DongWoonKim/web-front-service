@@ -9,10 +9,10 @@ let hello = () => {
     let sendData = {
         message : 'Hello World!'
     }
-    // /hello
+    //
     $.ajax({
         method: 'POST',
-        url: '/webs/hello',
+        url: '/webs/api/hello',
         data: JSON.stringify(sendData), // 데이터를 JSON 형식으로 변환
         contentType: 'application/json; charset=utf-8', // 전송 데이터의 타입
         dataType: 'json', // 서버에서 받을 데이터의 타입
