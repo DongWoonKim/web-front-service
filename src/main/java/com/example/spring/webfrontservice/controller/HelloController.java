@@ -20,10 +20,13 @@ public class HelloController {
     @PostMapping("/api/hello")
     @ResponseBody
     public HelloResponseDTO helloPost(
+            @RequestHeader(value = "Authorization", required = false) String authorizationHeader,
             @RequestBody HelloRequestDTO requestDTO,
             HttpServletRequest request,
             HttpServletResponse response
     ) {
+
+        System.out.println("authorizationHeader :: " + authorizationHeader);
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         // principal(subject/userId) 가져오기

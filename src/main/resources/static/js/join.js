@@ -23,7 +23,7 @@ $(document).ready(() => {
                 // 성공 시 실행될 콜백 함수
                 alert('회원가입이 성공했습니다.\n로그인해주세요.');
                 // 성공 후 다른 페이지로 이동하거나 처리할 코드 작성 가능
-                window.location.href = response.url;
+                window.location.href = '/webs/login';
             },
             error: function(error) {
                 // 실패 시 실행될 콜백 함수

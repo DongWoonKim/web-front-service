@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ClaimsReqeustDTO {
-    private String token;
+public class ErrorResponseDTO {
+    private int statusCode;
+    private String message;
 }

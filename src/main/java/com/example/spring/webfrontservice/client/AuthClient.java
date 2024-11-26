@@ -5,21 +5,15 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "authClient", url = "${polar.auth-service-uri}")
+@FeignClient(name = "authClient", url = "${polar.auth-service-url}")
 public interface AuthClient {
 
-    @PostMapping("/auths/join")
+    @PostMapping("/join")
     JoinClientResponseDTO join(@RequestBody JoinRequestDTO joinRequestDTO);
 
-    @PostMapping("/auths/login")
+    @PostMapping("/login")
     LoginClientResponseDTO login(@RequestBody LoginRequestDTO loginRequestDTO);
 
-    @PostMapping("/auths/refresh")
+    @PostMapping("/refresh")
     RefreshTokenClientResponseDTO refresh(@RequestBody RefreshTokenRequestDTO refreshTokenRequestDTO);
-
-    @PostMapping("/auths/validToken")
-    ValidTokenResponseDTO validToken(@RequestBody ValidTokenRequestDTO validTokenRequestDTO);
-
-    @PostMapping("/auths/claims")
-    ClaimsResponseDTO getAuthentication(@RequestBody ClaimsReqeustDTO claimsReqeustDTO);
 }

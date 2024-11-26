@@ -9,4 +9,5 @@ spring:
       static-locations: classpath:/static/
 
 polar:
-  auth-service-uri: ${AUTH_SERVICE_URL:http://localhost:9000}
+  auth-service-url: ${AUTH_SERVICE_URL:http://localhost:9000}/auths
+  catalog-service-url: ${CATALOG_SERVICE_URL:http://localhost:9000}/books

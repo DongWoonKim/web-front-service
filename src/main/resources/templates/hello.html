@@ -18,9 +18,7 @@
 
     let checkToken = () => {
         let token = localStorage.getItem('accessToken');
-        console.log('access token 22 :: ', token)
         if (token == 'undefined' || token == null || token.trim() === '') {
-            console.log('hihihihi112')
             handleTokenExpiration();
         }
     }
