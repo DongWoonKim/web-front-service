@@ -9,7 +9,7 @@ spring:
       static-locations: classpath:/static/
 
 polar:
-  auth-service-url: 172.20.231.191:80/auths
-  catalog-service-url: 172.20.231.191:80/books
+  auth-service-url: http://edge-service/auths
+  catalog-service-url: http://edge-service/books
 #  auth-service-url: ${AUTH_SERVICE_URL:http://localhost:9000}/auths
 #  catalog-service-url: ${CATALOG_SERVICE_URL:http://localhost:9000}/books
