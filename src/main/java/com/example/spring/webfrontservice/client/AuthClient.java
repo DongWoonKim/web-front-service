@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "authClient", url = "${polar.auth-service-url}")
+@FeignClient(name = "authClient", url = "${polar.edge-service-url}/auths")
 public interface AuthClient {
 
     @PostMapping("/join")

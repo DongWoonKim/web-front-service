@@ -1,5 +1,5 @@
 server:
-  port: 8887
+  port: 9005
 
 spring:
   application:
@@ -9,7 +9,8 @@ spring:
       static-locations: classpath:/static/
 
 polar:
-  auth-service-url: af92a482d3654425e86c3f7e570c9264-1319189162.ap-northeast-2.elb.amazonaws.com/auths
-  catalog-service-url: af92a482d3654425e86c3f7e570c9264-1319189162.ap-northeast-2.elb.amazonaws.com/books
-#  auth-service-url: ${AUTH_SERVICE_URL:http://localhost:9000}/auths
-#  catalog-service-url: ${CATALOG_SERVICE_URL:http://localhost:9000}/books
+#  auth-service-url: a10111041f4ec411daa773d655def285-1442219654.ap-northeast-2.elb.amazonaws.com:80/auths
+#  catalog-service-url: a10111041f4ec411daa773d655def285-1442219654.ap-northeast-2.elb.amazonaws.com:80/books
+  edge-service-url: ${EDGE_SERVICE_URL:http://localhost:9000}
+  auth-service-url: ${EDGE_SERVICE_URL:http://localhost:9000}/auths
+  catalog-service-url: ${EDGE_SERVICE_URL:http://localhost:9000}/books
